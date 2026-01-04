@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Jadwal Kuliah</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    body {
+      background-color: #f4f8fb;
+      padding: 30px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #87ceeb;
+      color: #000;
+      font-weight: bold;
+    }
+
+    tr:hover {
+      background-color: #e0f2ff;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      th {
+        text-align: left;
+      }
+
+      tr {
+        margin-bottom: 15px;
+      }
+
+      td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+      }
+
+      td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        width: 45%;
+        padding-left: 15px;
+        font-weight: bold;
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">Home</div>
+    <ul>
+      <li><a href="dashboard">Beranda</a></li>
+      <li><a href="galeri">Galeri</a></li>
+      <li><a href="jadkul">Jadwal Perkuliahan</a></li>
+      <li><a href="absensi">Absensi</a></li>
+      <li><a href="pembayaran">Pembayaran</a></li>
+      <li><a href="kontak">Kontak</a></li>
+    </ul>
+  </nav>
+
+
+  <h2 style="margin-top: 40px;">Jadwal Kuliah</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Mata Kuliah</th>
+        <th>SKS</th>
+        <th>Dosen Pengajar</th>
+        <th>Hari</th>
+        <th>Jam</th>
+        <th>Tahun Ajaran</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-label="Mata Kuliah">Pemrograman Web</td>
+        <td data-label="SKS">3</td>
+        <td data-label="Dosen Pengajar">Budi Santoso</td>
+        <td data-label="Hari">Senin</td>
+        <td data-label="Jam">08:00 - 10:00</td>
+        <td data-label="Tahun Ajaran">2025/2026</td>
+      </tr>
+      <tr>
+        <td data-label="Mata Kuliah">Basis Data</td>
+        <td data-label="SKS">3</td>
+        <td data-label="Dosen Pengajar">Siti Aminah</td>
+        <td data-label="Hari">Selasa</td>
+        <td data-label="Jam">10:00 - 12:00</td>
+        <td data-label="Tahun Ajaran">2025/2026</td>
+      </tr>
+      <tr>
+        <td data-label="Mata Kuliah">Algoritma & Struktur Data</td>
+        <td data-label="SKS">4</td>
+        <td data-label="Dosen Pengajar">Rizky Putra</td>
+        <td data-label="Hari">Rabu</td>
+        <td data-label="Jam">13:00 - 16:00</td>
+        <td data-label="Tahun Ajaran">2025/2026</td>
+      </tr>
+      <tr>
+        <td data-label="Mata Kuliah">Sistem Operasi</td>
+        <td data-label="SKS">3</td>
+        <td data-label="Dosen Pengajar">Andi Pratama</td>
+        <td data-label="Hari">Kamis</td>
+        <td data-label="Jam">08:00 - 10:00</td>
+        <td data-label="Tahun Ajaran">2025/2026</td>
+      </tr>
+      <tr>
+        <td data-label="Mata Kuliah">Jaringan Komputer</td>
+        <td data-label="SKS">3</td>
+        <td data-label="Dosen Pengajar">Dewi Lestari</td>
+        <td data-label="Hari">Jumat</td>
+        <td data-label="Jam">10:00 - 12:00</td>
+        <td data-label="Tahun Ajaran">2025/2026</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <footer>
+    © 2025 MyDashboard | All Rights Reserved
+  </footer>
+
+</body>
+</html>

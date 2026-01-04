@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Galeri</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    /* Container galeri */
+    .galeri-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px; 
+      justify-content: center;
+    }
+
+    /* Setiap gambar */
+    .galeri-container img {
+      width: 250px; 
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+
+    /* Hover efek */
+    .galeri-container img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .galeri-container img {
+        width: 45%;
+        height: 150px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .galeri-container img {
+        width: 90%;
+        height: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">Home</div>
+    <ul>
+      <li><a href="dashboard">Beranda</a></li>
+      <li><a href="galeri">Galeri</a></li>
+      <li><a href="jadkul">Jadwal Perkuliahan</a></li>
+      <li><a href="absensi">Absensi</a></li>
+      <li><a href="pembayaran">Pembayaran</a></li>
+      <li><a href="kontak">Kontak</a></li>
+    </ul>
+  </nav>
+
+  <h1 style="margin-top: 40px;">Galeri Gambar</h1>
+
+  <div class="galeri-container">
+    <img src="img/Kampus pelita bangsa.jpg" alt="a">
+    <img src="img/Kampus UPB.jpg" alt="a">
+    <img src="img/Pelita Bangsa.jpg" alt="a">
+    <img src="img/universitas pelita bangsa.jpg" alt="a">
+    <img src="img/UPB.jpg" alt="a">
+  </div>
+
+  <footer>
+    © 2025 MyDashboard | All Rights Reserved
+  </footer>
+
+</body>
+</html>

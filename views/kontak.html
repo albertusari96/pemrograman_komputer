@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Kontak Saya</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background-color: #f4f8fb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      color: #333;
+    }
+
+    .kontak-container {
+      text-align: center;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .profil-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+      border: 3px solid #87ceeb;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-bottom: 5px;
+    }
+
+    .kontak-links a {
+      display: block;
+      color: #fff;
+      background-color: #87ceeb;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .kontak-links a:hover {
+      background-color: #00bfff;
+    }
+
+    @media (max-width: 480px) {
+      .profil-img {
+        width: 120px;
+        height: 120px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">Home</div>
+    <ul>
+      <li><a href="dashboard">Beranda</a></li>
+      <li><a href="galeri">Galeri</a></li>
+      <li><a href="jadkul">Jadwal Perkuliahan</a></li>
+      <li><a href="absensi">Absensi</a></li>
+      <li><a href="pembayaran">Pembayan</a></li>
+      <li><a href="kontak">Kontak</a></li>
+    </ul>
+  </nav>
+
+  <div class="kontak-container">
+    <img src="img/motherboard-circuit-technology-background-gradient-blue.jpg" alt="Foto Profil" class="profil-img">
+
+    <h2>Ahmad Fauzi</h2>
+    <p>NIM: 123456789</p>
+    <p>Jurusan: Teknik Informatika</p>
+    <p>Fakultas: Ilmu Komputer</p>
+
+    <div class="kontak-links">
+      <a href="mailto:ahmad.fauzi@email.com">Email: ahmad.fauzi@email.com</a>
+      <a href="tel:+628123456789">HP/WA: +62 812-3456-789</a>
+      <a href="https://linkedin.com/in/ahmadfauzi" target="_blank">LinkedIn</a>
+      <a href="https://instagram.com/ahmadfauzi" target="_blank">Instagram</a>
+    </div>
+  </div>
+
+</body>
+</html>
