@@ -197,6 +197,22 @@
         color: #991b1b;
     }
 
+
+    .btn-logout {
+  background: #0a03d6;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: -10px;
+}
+
+.btn-logout:hover {
+  background: #dc2626;
+}
+
   </style>
 </head>
 <body>
@@ -212,6 +228,11 @@
       <li><a href="absensi">Absensi</a></li>
       <li><a href="pembayaran">Pembayaran</a></li>
       <li><a href="kontak">Kontak</a></li>
+       <li>
+        <form action="/logout" method="POST" style="display:inline;">
+          <button type="submit" class="btn-logout">Logout</button>
+        </form>
+      </li>
     </ul>
   </nav>
 
