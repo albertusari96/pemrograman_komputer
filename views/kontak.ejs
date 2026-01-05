@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Kontak Saya</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background-color: #f4f8fb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      color: #333;
+    }
+
+    .kontak-container {
+      text-align: center;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .profil-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+      border: 3px solid #87ceeb;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-bottom: 5px;
+    }
+
+    .kontak-links a {
+      display: block;
+      color: #fff;
+      background-color: #87ceeb;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .kontak-links a:hover {
+      background-color: #00bfff;
+    }
+
+    @media (max-width: 480px) {
+      .profil-img {
+        width: 120px;
+        height: 120px;
+      }
+    }
+
+.contact-container {
+    min-height: 100vh;
+    margin-top: 10px;
+    width: 100%;
+    background: #f4f6fb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+.contact-form-wrapper {
+    width: 100%;
+    max-width: 900px;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.1);
+    overflow: hidden;
+}
+
+.contact-header {
+    background: linear-gradient(90deg, #2563eb, #1e40af);
+    color: #fff;
+    padding: 32px 40px;
+}
+
+.contact-header h2 {
+    margin: 0;
+    font-size: 26px;
+}
+
+.contact-header p {
+    margin-top: 6px;
+    font-size: 15px;
+    opacity: .9;
+}
+
+.contact-form {
+    padding: 40px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group.full {
+    grid-column: span 2;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+    font-size: 14px;
+    transition: .2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #2563eb;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(37,99,235,.15);
+}
+
+.btn-submit {
+    margin-top: 10px;
+    width: 100%;
+    padding: 16px;
+    background: #2563eb;
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background: #1e40af;
+}
+
+.alert-success {
+    background: #dcfce7;
+    color: #166534;
+    padding: 14px;
+    margin: 24px 40px 0;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full {
+        grid-column: span 1;
+    }
+
+    .contact-form {
+        padding: 24px;
+    }
+}
+
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">
+      <img src="img/Logo UPB.png" width="30px" alt="logo">
+      <span style="font-size: 24px; margin-left: 10px;">Universitas Pelita Bangsa</span> <span style="font-size: 16px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; margin-left: 10px;">Enterpreneur University</span></div>
+    <ul>
+      <li><a href="dashboard">Beranda</a></li>
+      <li><a href="galeri">Galeri</a></li>
+      <li><a href="jadkul">Jadwal Perkuliahan</a></li>
+      <li><a href="absensi">Absensi</a></li>
+      <li><a href="pembayaran">Pembayaran</a></li>
+      <li><a href="kontak">Kontak</a></li>
+    </ul>
+  </nav>
+
+  <div class="contact-container">
+    <div class="contact-form-wrapper">
+
+        <div class="contact-header">
+            <h2>Hubungi Kami</h2>
+            <p>Kirim pesan, kami akan segera merespons</p>
+        </div>
+
+        <% if (success) { %>
+            <div class="alert-success">
+                Pesan berhasil dikirim ✅
+            </div>
+        <% } %>
+
+        <form action="/kontak" method="POST" class="contact-form">
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Nama Lengkap</label>
+                    <input type="text" name="nama" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" required>
+                </div>
+            </div>
+
+            <div class="form-group full">
+                <label>Subject</label>
+                <input type="text" name="subject" required>
+            </div>
+
+            <div class="form-group full">
+                <label>Pesan</label>
+                <textarea name="pesan" rows="5" required></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">
+                Kirim Pesan
+            </button>
+        </form>
+    </div>
+  </div>
+
+
+
+</body>
+</html>

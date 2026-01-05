@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Riwayat Pembayaran</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    body {
+      background-color: #f4f8fb;
+      padding: 30px;
+      color: #333;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      th {
+        text-align: left;
+      }
+
+      tr {
+        margin-bottom: 15px;
+      }
+
+      td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+      }
+
+      td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        width: 45%;
+        padding-left: 15px;
+        font-weight: bold;
+        text-align: left;
+      }
+    }
+
+    .payment-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: #fff;
+        box-shadow: 0 8px 24px rgba(0,0,0,.08);
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .payment-table th,
+    .payment-table td {
+        padding: 12px 14px;
+        border-bottom: 1px solid #eee;
+        text-align: center;
+    }
+
+    .payment-table th {
+        background: #f5f7fa;
+        font-weight: 600;
+    }
+
+    .payment-table tbody tr:hover {
+        background: #f9fafb;
+    }
+
+    .btn-download {
+        padding: 6px 12px;
+        background: #2563eb;
+        color: #fff;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 13px;
+    }
+
+    .btn-download:hover {
+        background: #1e40af;
+    }
+
+
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">
+      <img src="img/Logo UPB.png" width="30px" alt="logo">
+      <span style="font-size: 24px; margin-left: 10px;">Universitas Pelita Bangsa</span> <span style="font-size: 16px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; margin-left: 10px;">Enterpreneur University</span></div>
+    <ul>
+      <li><a href="dashboard">Beranda</a></li>
+      <li><a href="galeri">Galeri</a></li>
+      <li><a href="jadkul">Jadwal Perkuliahan</a></li>
+      <li><a href="absensi">Absensi</a></li>
+      <li><a href="pembayaran">Pembayaran</a></li>
+      <li><a href="kontak">Kontak</a></li>
+    </ul>
+  </nav>
+
+  <h2 style="margin-top: 70px;">Data Pembayaran</h2>
+
+  <table class="payment-table">
+      <thead>
+          <tr>
+              <th>No</th>
+              <th>Bayar Ke</th>
+              <th>Item Biaya</th>
+              <th>Nilai Bayar</th>
+              <th>Tanggal Bayar</th>
+              <th>Keterangan</th>
+              <th>Aksi</th>
+          </tr>
+      </thead>
+      <tbody>
+          <% pembayaran.forEach((p, i) => { %>
+              <tr>
+                  <td><%= i + 1 %></td>
+                  <td><%= p.bayar_ke %></td>
+                  <td><%= p.item_biaya %></td>
+                  <td>Rp <%= p.nilai_bayar.toLocaleString('id-ID') %></td>
+                  <td><%= p.tanggal_bayar_formatted %></td>
+                  <td><%= p.keterangan %></td>
+                  <td>
+                    <a href="/pembayaran/download/<%= p.id_pembayaran %>" class="btn-download">
+                        Download PDF
+                    </a>
+                </td>
+              </tr>
+          <% }) %>
+      </tbody>
+  </table>
+
+
+  <footer>
+    © Jalan Inpeksi Kalimalang No.9, Cibatu, Cikarang Selatan – Kabupaten Bekasi, Jawa Barat 17530
+  </footer>
+</body>
+</html>
