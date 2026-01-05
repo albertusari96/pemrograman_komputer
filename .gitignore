@@ -1,0 +1,34 @@
+# === Node modules ===
+node_modules/
+
+# === Environment variables ===
+.env
+
+# === Logs ===
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+*.log
+
+# === OS files ===
+.DS_Store
+Thumbs.db
+
+# === Editor ===
+.vscode/
+.idea/
+
+# === Build output (jika ada) ===
+dist/
+build/
+
+# === Upload / generated files ===
+uploads/
+tmp/
+
+# === Coverage ===
+coverage/
+
+# === PDF / export files ===
+*.pdf

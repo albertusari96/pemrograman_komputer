@@ -1,0 +1,89 @@
+CREATE TABLE absensi (
+    id_absensi INT AUTO_INCREMENT PRIMARY KEY,
+    id_matkul INT NOT NULL,
+    tanggal DATE NOT NULL,
+    pertemuan_ke TINYINT NOT NULL,
+    status ENUM('Hadir','Izin','Sakit','Alfa') NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_absensi_matkul
+        FOREIGN KEY (id_matkul)
+        REFERENCES matkul(id_matkul)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+CREATE TABLE matkul (
+    id_matkul INT AUTO_INCREMENT PRIMARY KEY,
+    mata_kuliah VARCHAR(100) NOT NULL,
+    sks TINYINT NOT NULL,
+    dosen_pengajar VARCHAR(100) NOT NULL,
+    hari ENUM('Senin','Selasa','Rabu','Kamis','Jumat','Sabtu') NOT NULL,
+    jam TIME NOT NULL,
+    tahun_ajaran VARCHAR(9) NOT NULL
+);
+
+ALTER TABLE matkul
+ADD total_pertemuan TINYINT DEFAULT 20;
+
+
+SELECT
+    m.mata_kuliah,
+    m.total_pertemuan,
+    COUNT(a.id_absensi) AS total_absen,
+    SUM(a.status = 'Hadir') AS hadir
+FROM matkul m
+LEFT JOIN absensi a ON m.id_matkul = a.id_matkul
+GROUP BY m.id_matkul;
+
+SELECT
+    m.id_matkul,
+    m.mata_kuliah,
+    m.total_pertemuan,
+    COUNT(a.id_absensi) AS pertemuan_tercatat,
+    SUM(CASE WHEN a.status = 'Hadir' THEN 1 ELSE 0 END) AS jumlah_hadir,
+    ROUND(
+        (SUM(CASE WHEN a.status = 'Hadir' THEN 1 ELSE 0 END) / m.total_pertemuan) * 100,
+        2
+    ) AS persentase_kehadiran
+FROM matkul m
+LEFT JOIN absensi a
+    ON a.id_matkul = m.id_matkul
+GROUP BY
+    m.id_matkul,
+    m.mata_kuliah,
+    m.total_pertemuan;
+
+
+CREATE TABLE pembayaran (
+    id_pembayaran INT AUTO_INCREMENT PRIMARY KEY,
+    bayar_ke TINYINT NOT NULL,
+    nilai_bayar DECIMAL(12,2) NOT NULL,
+    tanggal_bayar DATE NOT NULL,
+    item_biaya VARCHAR(100) NOT NULL,
+    keterangan VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO pembayaran 
+(bayar_ke, nilai_bayar, tanggal_bayar, item_biaya, keterangan) VALUES
+(1, 1500000, '2024-01-10', 'SPP Semester', 'Pembayaran awal'),
+(2, 1500000, '2024-02-10', 'SPP Semester', 'Cicilan ke-2'),
+(3, 1500000, '2024-03-10', 'SPP Semester', 'Cicilan ke-3'),
+(4, 500000,  '2024-03-20', 'Praktikum', 'Lab komputer'),
+(5, 750000,  '2024-04-10', 'UTS', 'Biaya ujian tengah semester'),
+(6, 1500000, '2024-05-10', 'SPP Semester', 'Cicilan ke-4'),
+(7, 750000,  '2024-06-05', 'UAS', 'Biaya ujian akhir'),
+(8, 300000,  '2024-06-15', 'Perpustakaan', 'Administrasi'),
+(9, 250000,  '2024-07-01', 'Kegiatan Mahasiswa', 'UKM'),
+(10,500000,  '2024-07-10', 'Wisuda', 'Biaya wisuda');
+
+
+CREATE TABLE kontak (
+    id_kontak INT AUTO_INCREMENT PRIMARY KEY,
+    nama VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    subject VARCHAR(150) NOT NULL,
+    pesan TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

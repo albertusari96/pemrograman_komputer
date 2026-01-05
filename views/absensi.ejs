@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Riwayat Absensi</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background-color: #f4f8fb;
+      padding: 30px;
+      color: #333;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    /* Tabel absensi */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 12px 15px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #87ceeb;
+      font-weight: bold;
+    }
+
+    tr:hover {
+      background-color: #e0f2ff;
+    }
+
+    /* Progress bar */
+    .progress-container {
+      width: 100%;
+      background-color: #e0e0e0;
+      border-radius: 20px;
+      overflow: hidden;
+      height: 20px;
+      max-width: 150px;
+      margin: auto;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background-color: #87ceeb;
+      width: 0%;
+      text-align: center;
+      color: white;
+      font-weight: bold;
+      line-height: 20px;
+      transition: width 0.5s;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      th {
+        text-align: left;
+      }
+
+      tr {
+        margin-bottom: 15px;
+      }
+
+      td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+      }
+
+      td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        width: 45%;
+        padding-left: 15px;
+        font-weight: bold;
+        text-align: left;
+      }
+    }
+
+    .section-title {
+    margin: 20px 0;
+    font-size: 20px;
+    font-weight: 600;
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0,0,0,.08);
+    }
+
+    .attendance-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+    }
+
+    .attendance-table thead {
+        background: #f5f7fa;
+    }
+
+    .attendance-table th,
+    .attendance-table td {
+        padding: 12px 14px;
+        text-align: center;
+        border-bottom: 1px solid #eee;
+    }
+
+    .attendance-table th {
+        font-weight: 600;
+        color: #555;
+    }
+
+    .attendance-table tbody tr:hover {
+        background: #f9fafb;
+    }
+
+    .matkul {
+        text-align: left;
+        font-weight: 500;
+    }
+
+    .empty {
+        padding: 20px;
+        color: #999;
+    }
+
+    /* Progress Bar */
+    .progress {
+        background: #e5e7eb;
+        border-radius: 999px;
+        height: 8px;
+        margin-bottom: 4px;
+        overflow: hidden;
+    }
+
+    .progress-bar {
+        height: 100%;
+        transition: width .3s ease;
+    }
+
+    .progress-bar.safe {
+        background: linear-gradient(90deg, #22c55e, #16a34a);
+    }
+
+    .progress-bar.danger {
+        background: linear-gradient(90deg, #ef4444, #dc2626);
+    }
+
+    .percent {
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    /* Badge */
+    .badge {
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .badge.success {
+        background: #dcfce7;
+        color: #166534;
+    }
+
+    .badge.warning {
+        background: #fee2e2;
+        color: #991b1b;
+    }
+
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">
+      <img src="img/Logo UPB.png" width="30px" alt="logo">
+      <span style="font-size: 24px; margin-left: 10px;">Universitas Pelita Bangsa</span> <span style="font-size: 16px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; margin-left: 10px;">Enterpreneur University</span></div>
+    <ul>
+      <li><a href="dashboard">Beranda</a></li>
+      <li><a href="galeri">Galeri</a></li>
+      <li><a href="jadkul">Jadwal Perkuliahan</a></li>
+      <li><a href="absensi">Absensi</a></li>
+      <li><a href="pembayaran">Pembayaran</a></li>
+      <li><a href="kontak">Kontak</a></li>
+    </ul>
+  </nav>
+
+  <h2 style="margin-top: 40px;">Riwayat Absensi</h2>
+
+  <div class="jumbotron">
+    <h1>Absensi Hari Ini</h1>
+    <p>Silakan pilih mata kuliah dan status kehadiran Anda</p>
+
+    <form action="/absensi" method="POST" class="absen-form">
+        <div>
+            <label>Mata Kuliah</label><br>
+            <select name="id_matkul" required>
+                <option value="">-- Pilih Mata Kuliah --</option>
+                <% matkulHariIni.forEach(m => { %>
+                    <option value="<%= m.id_matkul %>">
+                        <%= m.mata_kuliah %> (<%= m.jam %>)
+                    </option>
+                <% }) %>
+            </select>
+        </div>
+
+        <div>
+            <label>Status Kehadiran</label><br>
+            <select name="status" required>
+                <option value="Hadir">Hadir</option>
+                <option value="Izin">Izin</option>
+                <option value="Sakit">Sakit</option>
+                <option value="Alfa">Alfa</option>
+            </select>
+        </div>
+
+        <div>
+            <br>
+            <button type="submit">Simpan Absensi</button>
+        </div>
+    </form>
+
+  </div>
+
+
+
+  <h3 class="section-title">Rekap Kehadiran Mata Kuliah</h3>
+
+  <div class="table-wrapper">
+      <table class="attendance-table">
+          <thead>
+              <tr>
+                  <th>No</th>
+                  <th>Mata Kuliah</th>
+                  <th>Total Pertemuan</th>
+                  <th>Tercatat</th>
+                  <th>Hadir</th>
+                  <th>Persentase</th>
+                  <th>Status</th>
+              </tr>
+          </thead>
+          <tbody>
+              <% if (dataPresentase.length === 0) { %>
+                  <tr>
+                      <td colspan="7" class="empty">Belum ada data</td>
+                  </tr>
+              <% } %>
+
+              <% dataPresentase.forEach((row, i) => { %>
+                  <tr>
+                      <td><%= i + 1 %></td>
+                      <td class="matkul"><%= row.mata_kuliah %></td>
+                      <td><%= row.total_pertemuan %></td>
+                      <td><%= row.pertemuan_tercatat %></td>
+                      <td><%= row.jumlah_hadir %></td>
+                      <td>
+                          <div class="progress">
+                              <div 
+                                  class="progress-bar <%= row.persentase_kehadiran >= 75 ? 'safe' : 'danger' %>"
+                                  style="width: <%= row.persentase_kehadiran %>%">
+                              </div>
+                          </div>
+                          <span class="percent">
+                              <%= row.persentase_kehadiran %>%
+                          </span>
+                      </td>
+                      <td>
+                          <% if (row.persentase_kehadiran >= 75) { %>
+                              <span class="badge success">AMAN</span>
+                          <% } else { %>
+                              <span class="badge warning">KURANG</span>
+                          <% } %>
+                      </td>
+                  </tr>
+              <% }) %>
+          </tbody>
+      </table>
+  </div>
+
+  <h2 style="margin-top: 20px;">Riwayat Absensi</h2>
+
+  <table border="0" width="100%">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Mata Kuliah</th>
+            <th>Tanggal</th>
+            <th>Pertemuan</th>
+            <th>Status</th>
+            <!-- <th>Persentase</th> -->
+        </tr>
+    </thead>
+
+    <tbody>
+        <% if (riwayatAbsensi && riwayatAbsensi.length > 0) { %>
+            <% riwayatAbsensi.forEach((a, i) => { %>
+                <tr>
+                    <td><%= i + 1 %></td>
+                    <td><%= a.mata_kuliah %></td>
+                    <td><%= a.tanggalFormatted  %></td>
+                    <td><%= a.pertemuan_ke %></td>
+                    <td><%= a.status %></td>
+                    <!-- <td><%= a.persentase %>%</td> -->
+                </tr>
+            <% }) %>
+        <% } else { %>
+            <tr>
+                <td colspan="6" style="text-align:center;">
+                    Belum ada data absensi
+                </td>
+            </tr>
+        <% } %>
+    </tbody>
+  </table>
+
+
+  <footer>
+    © Jalan Inpeksi Kalimalang No.9, Cibatu, Cikarang Selatan – Kabupaten Bekasi, Jawa Barat 17530
+  </footer>
+
+</body>
+</html>
