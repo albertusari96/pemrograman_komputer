@@ -196,3 +196,19 @@ footer {
         width: 100%;
     }
 }
+
+
+    .btn-logout {
+  background: #0a03d6;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: -10px;
+}
+
+.btn-logout:hover {
+  background: #dc2626;
+}

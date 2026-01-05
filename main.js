@@ -126,7 +126,6 @@ app.get('/absensi', (req, res) => {
     const matkulQuery = `
         SELECT id_matkul, mata_kuliah, jam, total_pertemuan
         FROM matkul
-        WHERE hari = ?
     `;
 
     // QUERY 2: Riwayat absensi
@@ -162,7 +161,7 @@ app.get('/absensi', (req, res) => {
         GROUP BY m.id_matkul, m.mata_kuliah, m.total_pertemuan
     `;
 
-    db.query(matkulQuery, [hariIni], (err, matkulHariIni) => {
+    db.query(matkulQuery, (err, matkulHariIni) => {
         if (err) {
             console.error(err);
             return res.sendStatus(500);
@@ -375,6 +374,17 @@ exports.generateBuktiPembayaran = (pembayaran, res) => {
 };
 
 
+app.post("/logout", (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            console.error(err);
+            return res.redirect("/dashboard");
+        }
+
+        res.clearCookie("connect.sid"); // optional tapi recommended
+        res.redirect("/");
+    });
+});
 
 
 app.listen(3000, () => console.log("Server berjalan di http://localhost:3000"));
